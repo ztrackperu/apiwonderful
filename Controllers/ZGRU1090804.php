@@ -164,18 +164,20 @@ class ZGRU1090804 extends Controller{
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}
             if ( $variable!="") {
-                if ($variable!="") {
+                if ($clave!="") {
                     //validacion de humedad de 0 a 99
                     if ($variable>=1 && $variable<= 99) {
                         if($superUsuario['clave']==$clave){
                             //validaciones correctas , insertar en tabla comandos
                             $mes_fecha = date("n_Y");
                             $prueba1 =$dispositivos[0]."_".$mes_fecha;
+                            /*
                             $cursor  = client->$prueba1->madurador->find(array(),array('sort'=>array('id'=>-1),'limit'=>1));
                             foreach ($cursor as $document) {
                                 array_push($resul,$document);
                               }
                               $validacion =" la telemetria es :".$resul[0]["telemetria_id"];
+                              */ $validacion= $prueba1;
                         }else{$validacion= "Parametro de humedad fuera de rango";}
                     }else{$validacion= "Parametro de humedad fuera de rango";}
                 }else{$validacion= "No ingresaste la contraseña";}
