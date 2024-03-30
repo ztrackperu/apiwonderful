@@ -156,6 +156,7 @@ class ZGRU1090804 extends Controller{
         //verificar que tenga el rol 2 o 3 sino rechazar por permiso
         $superUsuario = $this->model->superUser($token);
         if ($superUsuario['rol']==2 ||$superUsuario['rol']==3) {
+              /*
             $variable="";
             $clave="";
             $array = explode(",", $parametro);
@@ -164,7 +165,7 @@ class ZGRU1090804 extends Controller{
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}
             
-            /*
+          
             if ( $variable!="") {
                 if ($clave!="") {
                     //validacion de humedad de 0 a 99
