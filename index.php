@@ -13,7 +13,8 @@ header('Content-type: application/json; charset=utf-8');
     require_once "Config/Config.php";
     require_once "Config/Helpers.php";
     require_once "Config/funciones.php";
-    require '../ztotal/vendor/autoload.php';
+    require '../../test/ztotal/vendor/autoload.php';
+    //require '../ztotal/vendor/autoload.php';
 
 //use Exception;
 use MongoDB\Client;
