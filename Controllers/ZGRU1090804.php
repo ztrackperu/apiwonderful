@@ -156,7 +156,31 @@ class ZGRU1090804 extends Controller{
         //verificar que tenga el rol 2 o 3 sino rechazar por permiso
         $superUsuario = $this->model->superUser($token);
         if ($superUsuario['rol']==2 ||$superUsuario['rol']==3) {
-            $validacion= "todo bien";
+            $variable="";
+            $clave="";
+            $array = explode(",", $parametro);
+            $dispositivos = array("ZGRU1090804");
+            $resul =[];
+            if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
+            if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}
+            if ( $variable!="") {
+                if ($variable!="") {
+                    //validacion de humedad de 0 a 99
+                    if ($variable>=1 && $variable<= 99) {
+                        if($superUsuario['clave']==$clave){
+                            //validaciones correctas , insertar en tabla comandos
+                            $mes_fecha = date("n_Y");
+                            $prueba1 =$dispositivos[0]."_".$mes_fecha;
+                            $cursor  = client->$prueba1->madurador->find(array(),array('sort'=>array('id'=>-1),'limit'=>1));
+                            foreach ($cursor as $document) {
+                                array_push($resul,$document);
+                              }
+                              $validacion =" la telemetria es :".$resul[0]["telemetria_id"];
+                        }else{$validacion= "Parametro de humedad fuera de rango";}
+                    }else{$validacion= "Parametro de humedad fuera de rango";}
+                }else{$validacion= "No ingresaste la contraseña";}
+            }else{$validacion= "No ingresaste el parametro";}
+            //verificar ocntrseña y dato que se numerico y que este un rango adecuado
         }else{ $validacion= "You do not have Authorization :(";}
         echo json_encode($this->respuesta($validacion));
     
