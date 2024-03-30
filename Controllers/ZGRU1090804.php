@@ -156,7 +156,7 @@ class ZGRU1090804 extends Controller{
         //verificar que tenga el rol 2 o 3 sino rechazar por permiso
         $superUsuario = $this->model->superUser($token);
         if ($superUsuario['rol']==2 ||$superUsuario['rol']==3) {
-              /*
+              
             $variable="";
             $clave="";
             $array = explode(",", $parametro);
@@ -185,7 +185,7 @@ class ZGRU1090804 extends Controller{
                     }else{$validacion= "Parametro de humedad fuera de rango";}
                 }else{$validacion= "No ingresaste la contraseña";}
             }else{$validacion= "No ingresaste el parametro";}
-            */$validacion ="vamos ok";
+            //$validacion ="vamos ok";
 
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
         }else{ $validacion= "You do not have Authorization :(";}
