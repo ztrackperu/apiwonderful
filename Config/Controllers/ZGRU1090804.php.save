@@ -1,0 +1,99 @@
+<?php
+class ZGRU1090804 extends Controller{
+    public function __construct($api){
+        parent::__construct();
+        $token = $this->model->validar_token($api);
+        if($token==false){
+            header("location: " . base_url."api/Configuracion/NoAutorizado/".$api);
+        }else{
+            if($token['estado']!=1){
+                header("location: " . base_url."api/Configuracion/Inactivo/".$api);
+            }
+            $fechaActual= date('Y-m-d H:i:s'); 
+            $NuevaFecha = strtotime ( '+6 hour' , strtotime ($token['fecha_token']) ) ;
+            $fecha_token = date ( 'Y-m-d H:i:s' , $NuevaFecha); 
+            if($fechaActual>$fecha_token){
+                header("location: " . base_url."api/Configuracion/TokenExpirado/".$api);
+            }else{
+                //actualizar fecha _token
+                $token = $this->model->Actualizar_Fecha_token($fechaActual,$api);
+            }
+        }
+    }
+
+    public function Live($token,$parametro){
+        $dataGMT= $this->model->getGmt_Temp($token);
+        $GMT = $dataGMT['gmt'];
+        $GRADO =$dataGMT['modo_temp'];
+        $dispositivos = array("ZGRU1090804");
+        $mes_fecha = date("n_Y");
+        for($i=0;$i<count($dispositivos) ;$i++){
+            $prueba1 =$dispositivos[$i]."_".$mes_fecha;
+            $cursor  = client->$prueba1->madurador->find(array(),array('sort'=>array('id'=>-1),'limit'=>1));
+            $total[$dispositivos[$i]]=[];
+            foreach ($cursor as $document) {
+            array_unshift($total[$dispositivos[$i]],objetoW($document,$GMT,$GRADO));
+            }
+        }
+        echo json_encode($total);    
+    }
+    public function Total($token,$parametro){
+        $dataGMT= $this->model->getGmt_Temp($token);
+        $GMT = $dataGMT['gmt'];
+        $GRADO =$dataGMT['modo_temp'];
+        $array = explode(",", $parametro);
+        $cant = 400;
+        $etiquetas="";
+        $data=[];
+        $etiq=[];
+        if (!empty($array[0])) { if (!empty($array[0] != "")) {$cant = $array[0];}}
+        if (!empty($array[1])) { if (!empty($array[1] != "")) {$etiquetas = $array[1];}}
+        if($etiquetas!=""){
+            $arrayE = explode(".", $etiquetas);
+            $prueba = encontrarCoincidencias($arrayE);
+            if(count($prueba)>0){
+                $etiq=$prueba;
+            }
+        }
+        $validacion =validarCant($cant);
+        if($validacion=="ok"){
+        $dispositivos = array("ZGRU1090804");
+        $mes_fecha = date("n_Y");
+        for($i=0;$i<count($dispositivos) ;$i++){
+            $prueba1 =$dispositivos[$i]."_".$mes_fecha;
+            $cursor  = client->$prueba1->madurador->find(array(),array('sort'=>array('id'=>-1),'limit'=>intval($cant)));
+            foreach ($cursor as $document) {
+                array_unshift($data,objetoW($document,$GMT,$GRADO));
+            }
+        }
+        $validacion= " Resultados de Dispositivo  : ".$dispositivos[0]." una cantidad total de : ".$cant ." datos";
+        }
+	if(count($etiq)>0){
+	    
+            foreach ($data as $document) {
+                array_unshift($ndata,procesoAW($document,$etiq));
+            }
+
+
+	}
+	
+$ndata = [];
+function procesoAW($document,$etiqueta){
+    $objeto = [
+        "Date" =>$document["Date"],
+    ];
+    for( $j= 0;$j<count($etiqueta);$j++){
+        $objeto[$etiqueta[$j]] = $document[$etiqueta[$j]];
+    }
+    return $objeto ;
+}
+            foreach ($data as $document) {
+                array_unshift($ndata,procesoAW($document,$etiq));
+            }
+
+echo var_dump($etiq);
+
+echo var_dump($ndata);
+        echo json_encode(respuesta($validacion,$data));  
+    }
+}
