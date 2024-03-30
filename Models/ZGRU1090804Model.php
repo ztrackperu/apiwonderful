@@ -32,7 +32,7 @@ class ZGRU1090804Model extends Query{
     }
     public function superUser($token)
     {
-        $sql = "SELECT id ,rol,pass FROM usuarios_api Where token ='$token'";
+        $sql = "SELECT id ,rol,pass,gmt,modo_temp FROM usuarios_api Where token ='$token'";
         $data = $this->select($sql);
         return $data;
     }
