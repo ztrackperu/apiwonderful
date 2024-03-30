@@ -36,7 +36,25 @@ class ZGRU1090804Model extends Query{
         $data = $this->select($sql);
         return $data;
     }
-
+    //guardarComando($dispositivos[0],8,NA($resul[0]["TelematicId"]),NA($resul[0]["HumiditySetPoint"]),$variable ,$superUsuario['id'])
+    public function guardarComando($nombreDispositivo,$comnadoId,$TelemetriaId,$ValorActual,$ValorModificado,$UsuarioModifico)
+    {
+        $verificar = "SELECT id FROM comandos WHERE telemetria_id = '$TelemetriaId' AND comando_id = '$comnadoId' AND estado_comando = 1";
+        $existe = $this->select($verificar);
+        if (empty($existe)) {
+            $query = "INSERT INTO comandos (nombre_dispositivo,comando_id,telemetria_id,valor_actual,valor_modificado,usuario_modifico) VALUES (?,?,?,?,?,?)";
+            $datos = array($nombreDispositivo,$comnadoId,$TelemetriaId,$ValorActual,$ValorModificado,$UsuarioModifico);
+            $data = $this->save($query, $datos);
+            if ($data == 1) {
+                $res = "User successfully created";
+            } else {
+                $res = "error creating User";
+            }
+        } else {
+            $res = "Comand already exists";
+        }
+        return $res;
+    }
 }
 
 

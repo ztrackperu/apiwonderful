@@ -179,8 +179,10 @@ class ZGRU1090804 extends Controller{
                             foreach ($cursor as $document) {
                                 array_push($resul,objetoW($document,$superUsuario['gmt'],$superUsuario['modo_temp']));
                               }
-                              $validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
-                               //$validacion= $prueba1;
+                              //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
+                              //guardar en comandos 
+                              $Gcomando = $this->model->guardarComando($dispositivos[0],8,NA($resul[0]["TelematicId"]),NA($resul[0]["HumiditySetPoint"]),$variable ,$superUsuario['id']);
+                               $validacion =$Gcomando;
                         }else{$validacion= "Pass incorrecto";}
                     }else{$validacion= "Parametro de humedad fuera de rango";}
                 }else{$validacion= "No ingresaste la contraseña";}

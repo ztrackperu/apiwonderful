@@ -58,3 +58,18 @@ CREATE TABLE devices (
     fecha_evento timestamp NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `comandos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_dispositivo` varchar(150) NOT NULL,
+  `comando_id` int(2) NOT NULL,
+  `telemetria_id` int(11) NOT NULL,
+  `valor_actual` varchar(20) NOT NULL,
+  `valor_modificado` varchar(20) NOT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `usuario_modificado` int(2) DEFAULT 1,
+  `estado_comando` int(2) DEFAULT 1,
+  `fecha_ejecucion` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
