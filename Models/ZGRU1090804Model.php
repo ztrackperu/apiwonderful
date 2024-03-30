@@ -30,6 +30,12 @@ class ZGRU1090804Model extends Query{
         $data = $this->select($sql);
         return $data;
     }
+    public function superUser($token)
+    {
+        $sql = "SELECT id ,rol FROM usuarios_api Where token ='$token'";
+        $data = $this->select($sql);
+        return $data;
+    }
 
 }
 

@@ -146,4 +146,20 @@ class ZGRU1090804 extends Controller{
         }
         echo json_encode(respuestaR($validacion,$GMT,$GRADO,$data));
     }
+    function respuesta($mensaje1,$data=[]){
+        $mensaje["message"] = $mensaje1;
+        $mensaje["data"] = $data;
+        return $mensaje;
+    }
+
+    public function ControlHumidity($token,$parametro){
+        //verificar que tenga el rol 2 o 3 sino rechazar por permiso
+        $superUsuario = $this->model->superUser($token);
+        if ($superUsuario['rol']==2 ||$superUsuario['rol']==3) {
+            $validacion= "todo bien";
+        }else{ $validacion= "You do not have Authorization :(";}
+        echo json_encode($this->respuesta($validacion));
+    
+    }
+    
 }
