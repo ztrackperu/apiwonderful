@@ -276,7 +276,7 @@ function eeeobjetoW($document,$gmt,$temp){
         "AmbientAir(".$temp.")"=> Temperature($document["ambient_air"],$temp),"CargoTemp1"=> $document["cargo_1_temp"],"CargoTemp2"=> $document["cargo_2_temp"],
         "CargoTemp3"=> $document["cargo_3_temp"],"CargoTemp4"=> $document["cargo_4_temp"],"RelativeHumidity"=> $document["relative_humidity"],
         "AVL"=> $document["avl"],"SuctionPressure"=> $document["suction_pressure"],"DischargePressure"=> $document["discharge_pressure"],
-        "LineVoltage"=> $document["line_voltage"],"LineFrequency"=> $document["line_frequency"],"ConsumptionPH1"=> $document["consumption_ph_1"],
+        "LineVoltage"=> $document["line_voltage"],"LineFrequency"=> $document["line_frequency"],"ConsumptionPH1"=> $document["consumption_ph_1"], 
         "ConsumptionPH2"=> $document["consumption_ph_2"],"ConsumptionPH3"=> $document["consumption_ph_3"],"Co2Reading"=> $document["co2_reading"],
         "O2Reading"=> $document["o2_reading"],"EvaporatorSpeed"=> $document["evaporator_speed"],"CondenserSpeed"=> $document["condenser_speed"],
         "BatteryVoltage"=> $document["battery_voltage"],"PowerKwh"=> $document["power_kwh"],"PowerTripReading"=> $document["power_trip_reading"],
@@ -357,6 +357,11 @@ function objetoW($document,$gmt,$temp){
         "InjectionPWM"=> porcentaje(b($document["inyeccion_pwm"])),"Extra1"=> b($document["extra_1"])
    ];
     return $objeto ;
+}
+
+function NA($dato){
+    if($dato != null){ return $dato;
+    }else{return "NA";}
 }
 
 ?>
