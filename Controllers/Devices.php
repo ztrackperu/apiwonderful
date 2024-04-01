@@ -25,14 +25,17 @@ class Devices extends Controller
             }
         }
     }
-
-
+    function respuesta($mensaje1,$data=[]){
+        $mensaje["message"] = $mensaje1;
+        $mensaje["data"] = $data;
+        return $mensaje;
+    }
 
     public function Live($token,$param)
     {
         //consultar a la base de Datos 
         $dataGMT= $this->model->getGmt_Temp($token);
-        echo var_dump(json_encode($dataGMT));
+        //echo var_dump(json_encode($dataGMT));
         if($dataGMT){
             $GMT = $dataGMT['gmt'];
             $GRADO =$dataGMT['modo_temp'];
@@ -46,11 +49,14 @@ class Devices extends Controller
                 array_unshift($total[$dispositivos[$i]],objetoW($document,$GMT,$GRADO));
               }
             }
-            echo json_encode($total);
-            echo  " JEJEJ";
+            $men = "GMT = ".$GMT." and Temperature =  ".$GRADO."°";
+            //echo json_encode($total);
+            echo json_encode($this->respuesta($men,$total));
+            //echo  " JEJEJ";
         }else{
-            header("location: " . base_url."api/Configuracion/NoAutorizado/".$token);
-            echo " esta mal esto";
+            //header("location: " . base_url."api/Configuracion/NoAutorizado/".$token);
+            $men =  "You are not authorized";
+            echo json_encode($this->respuesta($men));
  
         }
 
