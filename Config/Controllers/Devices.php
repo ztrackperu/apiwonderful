@@ -7,7 +7,7 @@ class Devices extends Controller
         parent::__construct();
         //consulta del token de la API con su ultima fecha 
         $token = $this->model->validar_token($api);
-        //echo var_dump(($token));     
+        echo " de aqui sale". var_dump(($token)); 
         if($token==false){
             header("location: " . base_url."api/Configuracion/NoAutorizado/".$api);
         }else{
@@ -23,7 +23,7 @@ class Devices extends Controller
                 //actualizar fecha _token
                 $token = $this->model->Actualizar_Fecha_token($fechaActual,$api);
             }
-        }
+        } 
     }
 
 
