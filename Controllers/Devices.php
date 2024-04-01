@@ -32,6 +32,7 @@ class Devices extends Controller
     {
         //consultar a la base de Datos 
         $dataGMT= $this->model->getGmt_Temp($token);
+        echo var_dump(json_encode($dataGMT));
         $GMT = $dataGMT['gmt'];
         $GRADO =$dataGMT['modo_temp'];
     	$dispositivos = array("ZGRU1090804","ZGRU2232647","ZGRU2009227","ZGRU2008220");
