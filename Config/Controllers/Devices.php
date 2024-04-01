@@ -45,6 +45,7 @@ class Devices extends Controller
           }
         }
         echo json_encode($total);
+        echo "olitas";
      }
    
  }
