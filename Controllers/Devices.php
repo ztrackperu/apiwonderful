@@ -1,13 +1,10 @@
 <?php
 
 class Devices extends Controller
-{
-    
+{   
     public function __construct($api){
         parent::__construct();
-        //consulta del token de la API con su ultima fecha 
         $token = $this->model->validar_token($api);
-        //echo var_dump(($token));     
         if($token==false){
             header("location: " . base_url."api/Configuracion/NoAutorizado/".$api);
         }else{

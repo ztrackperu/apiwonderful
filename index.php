@@ -9,13 +9,11 @@ header("Access-Control-Allow-Headers: content-type");
 header("Access-Control-Allow-Methods: OPTIONS,GET,PUT,POST,DELETE");
 header('Content-type: application/json; charset=utf-8');
 
-
-    require_once "Config/Config.php";
-    require_once "Config/Helpers.php";
-    require_once "Config/funciones.php";
-    require '../../test/ztotal/vendor/autoload.php';
-    //require '../ztotal/vendor/autoload.php';
-
+require_once "Config/Config.php";
+require_once "Config/Helpers.php";
+require_once "Config/funciones.php";
+require '../../test/ztotal/vendor/autoload.php';
+//require '../ztotal/vendor/autoload.php';
 //use Exception;
 use MongoDB\Client;
 use MongoDB\Driver\ServerApi;
