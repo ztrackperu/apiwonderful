@@ -38,7 +38,7 @@ class ZGRU1090804 extends Controller{
         if($etiquetas!=""){
             $arrayE = explode(".", $etiquetas);
             $prueba = encontrarCoincidencias($arrayE);
-            if(count($prueba)>0){$etiq=$prueba;}
+            if(count($prueba)>0){$etiq=$prueba;} 
         }
         for($i=0;$i<count($dispositivos) ;$i++){
             $prueba1 =$dispositivos[$i]."_".$mes_fecha;

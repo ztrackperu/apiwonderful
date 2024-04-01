@@ -39,7 +39,7 @@ class Config extends Controller
 
     }
     function respuesta($mensaje1,$data=[]){
-        $mensaje["mesage"] = $mensaje1;
+        $mensaje["message"] = $mensaje1;
         $mensaje["data"] = $data;
         return $mensaje;
     }
@@ -58,7 +58,7 @@ class Config extends Controller
             if ($temp_I==1 || $temp_I==2 || $temp_I==3) {
                 $mensaje= "ok";
             }else{ $mensaje= "Incorrect format for Rol";}
-        }else{$mensaje= "Has already configured the Role in ".$temp_I;}
+        }else{$mensaje= "The role has been already set in ".$temp_I;}
         return $mensaje;
     }
     function validar_gmt($token,$gmt_I) {
@@ -108,12 +108,12 @@ class Config extends Controller
                     $dataHistorica = $this->model->dataHistorica($token);
                     $cambiarTemp= $this->model->cambiarTemp($token, $esquema[0]);
                     if($cambiarTemp){
-                        $validacion= "Temp was upgraded to : ".$esquema[0];
+                        $validacion= "Temp was updated  to : ".$esquema[0];
                         $GuardarHistorico = $this->model->HistoricoUsuario($dataHistorica['user'],"TEMP",$dataHistorica['modo_temp'],$esquema[0]," NO CONFIDENTIAL",$dataHistorica['user'],$validacion);        
                     }else{$validacion= "There was an error updating Temp"; }
                 }
             }
-        }else{$validacion= "I do not enter the Temperature format";}
+        }else{$validacion= "Didn’t enter the temperature format";}
         echo json_encode($this->respuesta($validacion));
     }
     public function CreateUser($token,$param)
@@ -225,14 +225,14 @@ class Config extends Controller
                                 if($cambiarTemp){
                                     $validacion= "There was an error updating Temp :$param";
                                     $GuardarHistorico = $this->model->HistoricoUsuario($validarUsuario['user'],"TEMP",$validarUsuario['modo_temp'],$param," NO CONFIDENTIAL","WONDERFUL",$validacion);        
-                                }else{$validacion= "I do not enter the Temperature format"; }}
+                                }else{$validacion= "Didn’t enter the temperature format"; }}
                         }
                         if(strtolower($accion)== "rol"){
                             $validacion =$this->validar_rol($validarUsuario['token'],$param);
                             if($validacion=="ok"){
                                 $cambiarRol= $this->model->cambiarRol($validarUsuario['token'], $param);
                                 if($cambiarRol){
-                                    $validacion= "Role was upgraded to :$param";
+                                    $validacion= "Role was set to :$param";
                                     $GuardarHistorico = $this->model->HistoricoUsuario($validarUsuario['user'],"ROLE",$validarUsuario['rol'],$param," NO CONFIDENTIAL","WONDERFUL",$validacion);        
                                 }else{$validacion= "there was an error updating Role"; }}
                         }
@@ -240,7 +240,7 @@ class Config extends Controller
                             $Rpassword = "@".$userM ;
                             $ResetPass= $this->model->resetPass($validarUsuario['token'], $Rpassword);
                             if($ResetPass=="ok"){
-                                $validacion= " Successful upgrade Reset Pass to :$Rpassword";
+                                $validacion= "Successful Reset Pass to  :$Rpassword";
                                 $GuardarHistorico = $this->model->HistoricoUsuario($validarUsuario['user'],"PASSWORD",$validarUsuario['pass'],"CONFIDENTIAL",$Rpassword,"WONDERFUL",$validacion);        
                             }else{$validacion= $ResetPass; }
                         }

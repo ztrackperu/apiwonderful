@@ -28,7 +28,7 @@ class History extends Controller
         }
     }
     function respuesta($mensaje1,$data=[]){
-        $mensaje["mesage"] = $mensaje1;
+        $mensaje["message"] = $mensaje1;
         $mensaje["data"] = $data;
         return $mensaje;
     }

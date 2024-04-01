@@ -6,7 +6,7 @@ class History extends Controller
         parent::__construct();
         //consulta del token de la API con su ultima fecha 
         $token = $this->model->validar_tokenH($api);
-        //echo var_dump(($token));     
+        echo var_dump(($token));     
         if($token==false){
             header("location: " . base_url."api/Configuracion/NoAutorizado/".$api);
         }else{
@@ -28,7 +28,7 @@ class History extends Controller
         }
     }
     function respuesta($mensaje1,$data=[]){
-        $mensaje["mesage"] = $mensaje1;
+        $mensaje["message"] = $mensaje1;
         $mensaje["data"] = $data;
         return $mensaje;
     }
