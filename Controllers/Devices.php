@@ -34,22 +34,35 @@ class Devices extends Controller
         $dataGMT= $this->model->getGmt_Temp($token);
         //echo var_dump(json_encode($dataGMT));
         if($dataGMT){
-            $GMT = $dataGMT['gmt'];
-            $GRADO =$dataGMT['modo_temp'];
-            $dispositivos = array("ZGRU1090804","ZGRU2232647","ZGRU2009227","ZGRU2008220");
-            $mes_fecha = date("n_Y");
-            for($i=0;$i<count($dispositivos) ;$i++){
-              $prueba1 =$dispositivos[$i]."_".$mes_fecha;
-              $cursor  = client->$prueba1->madurador->find(array(),array('sort'=>array('id'=>-1),'limit'=>1));
-              $total[$dispositivos[$i]]=[];
-              foreach ($cursor as $document) {
-                array_unshift($total[$dispositivos[$i]],objetoW($document,$GMT,$GRADO));
-              }
+            $token1 = $this->model->validar_token($token);
+            if($token1["estado"]== 1){
+                $fechaActual= date('Y-m-d H:i:s'); 
+                $NuevaFecha = strtotime ( '+6 hour' , strtotime ($token1['fecha_token']) ) ;
+                $fecha_token = date ( 'Y-m-d H:i:s' , $NuevaFecha); 
+                if($fechaActual<$fecha_token){
+                    $GMT = $dataGMT['gmt'];
+                    $GRADO =$dataGMT['modo_temp'];
+                    $dispositivos = array("ZGRU1090804","ZGRU2232647","ZGRU2009227","ZGRU2008220");
+                    $mes_fecha = date("n_Y");
+                    for($i=0;$i<count($dispositivos) ;$i++){
+                        $prueba1 =$dispositivos[$i]."_".$mes_fecha;
+                        $cursor  = client->$prueba1->madurador->find(array(),array('sort'=>array('id'=>-1),'limit'=>1));
+                        $total[$dispositivos[$i]]=[];
+                        foreach ($cursor as $document) {
+                            array_unshift($total[$dispositivos[$i]],objetoW($document,$GMT,$GRADO));
+                        }
+                    }
+                    $men = "GMT = ".$GMT." and Temperature =  ".$GRADO."°";
+                    //echo json_encode($total);
+                    echo json_encode($this->respuesta($men,$total));
+                }else{
+                    $men =  "The token is expired, generate a new one.";
+                    echo json_encode($this->respuesta($men));
+                }
+            }else{
+                $men =  "You are not enabled, please contact the administrator.";
+                echo json_encode($this->respuesta($men));
             }
-            $men = "GMT = ".$GMT." and Temperature =  ".$GRADO."°";
-            //echo json_encode($total);
-            echo json_encode($this->respuesta($men,$total));
-            //echo  " JEJEJ";
         }else{
             //header("location: " . base_url."api/Configuracion/NoAutorizado/".$token);
             $men =  "You are not authorized";
