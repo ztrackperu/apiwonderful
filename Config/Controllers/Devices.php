@@ -44,7 +44,7 @@ class Devices extends Controller
             array_unshift($total[$dispositivos[$i]],objetoW($document,$GMT,$GRADO));
           }
         }
-        echo json_encode($total);
+        //echo json_encode($total);
         echo "olitas";
      }
    
