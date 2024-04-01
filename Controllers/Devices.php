@@ -27,7 +27,6 @@ class Devices extends Controller
         $mensaje["data"] = $data;
         return $mensaje;
     }
-
     public function Live($token,$param)
     {
         //consultar a la base de Datos 
