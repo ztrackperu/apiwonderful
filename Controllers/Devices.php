@@ -33,20 +33,26 @@ class Devices extends Controller
         //consultar a la base de Datos 
         $dataGMT= $this->model->getGmt_Temp($token);
         echo var_dump(json_encode($dataGMT));
-        $GMT = $dataGMT['gmt'];
-        $GRADO =$dataGMT['modo_temp'];
-    	$dispositivos = array("ZGRU1090804","ZGRU2232647","ZGRU2009227","ZGRU2008220");
-    	$mes_fecha = date("n_Y");
-    	for($i=0;$i<count($dispositivos) ;$i++){
-          $prueba1 =$dispositivos[$i]."_".$mes_fecha;
-          $cursor  = client->$prueba1->madurador->find(array(),array('sort'=>array('id'=>-1),'limit'=>1));
-          $total[$dispositivos[$i]]=[];
-          foreach ($cursor as $document) {
-            array_unshift($total[$dispositivos[$i]],objetoW($document,$GMT,$GRADO));
-          }
+        if($dataGMT){
+            $GMT = $dataGMT['gmt'];
+            $GRADO =$dataGMT['modo_temp'];
+            $dispositivos = array("ZGRU1090804","ZGRU2232647","ZGRU2009227","ZGRU2008220");
+            $mes_fecha = date("n_Y");
+            for($i=0;$i<count($dispositivos) ;$i++){
+              $prueba1 =$dispositivos[$i]."_".$mes_fecha;
+              $cursor  = client->$prueba1->madurador->find(array(),array('sort'=>array('id'=>-1),'limit'=>1));
+              $total[$dispositivos[$i]]=[];
+              foreach ($cursor as $document) {
+                array_unshift($total[$dispositivos[$i]],objetoW($document,$GMT,$GRADO));
+              }
+            }
+            echo json_encode($total);
+            echo  " JEJEJ";
+        }else{
+            header("location: " . base_url."api/Configuracion/NoAutorizado/".$token);
+ 
         }
-        echo json_encode($total);
-        echo  " JEJEJ";
+
      }
    
  }
