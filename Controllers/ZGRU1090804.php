@@ -222,8 +222,8 @@ class ZGRU1090804 extends Controller{
                                $validacion =$Gcomando;
                         }else{$validacion= "Pass incorrecto";}
                     }else{$validacion= "Parametro de temperatura fuera de rango 2";}
-                }else{$validacion= "No ingresaste la contraseña";}
-            }else{$validacion= "No ingresaste el parametro";}
+                }else{$validacion= "No ingresaste la contraseña 11";}
+            }else{$validacion= "No ingresaste el parametro 22";}
             //$validacion ="vamos ok";
 
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
