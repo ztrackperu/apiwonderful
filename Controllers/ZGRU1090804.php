@@ -313,7 +313,7 @@ class ZGRU1090804 extends Controller{
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$clave = $array[0];}}               
                 if ($clave!="") {
-                    if ($variable>= 0 && $variable<= 2) {
+                    if ($variable>= 0 && $variable<= 3) {
                         if($superUsuario['pass']==$clave){
                             //validaciones correctas , insertar en tabla comandos
                             $mes_fecha = date("n_Y");
@@ -332,7 +332,7 @@ class ZGRU1090804 extends Controller{
                               }
 
                         }else{$validacion= "Pass incorrecto";}
-                    }else{$validacion= "Parametro de CO2 fuera de rango";}
+                    }else{$validacion= "Parametro defrost fuera de rango";}
                 }else{$validacion= "No ingresaste la contraseña";}  
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
         }else{ $validacion= "You do not have Authorization :(";}
