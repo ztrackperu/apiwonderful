@@ -325,7 +325,7 @@ class ZGRU1090804 extends Controller{
                               //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
                               //guardar en comandos 
                               if($resul[0]["PowerState"]==1){
-                                $Gcomando = $this->model->guardarComando($dispositivos[0],10,NA($resul[0]["TelematicId"]),$variable,NA($resul[0]["PowerState"]),$superUsuario['id']);
+                                $Gcomando = $this->model->guardarComando($dispositivos[0],10,NA($resul[0]["TelematicId"]),$variable,NA($resul[0]["PowerState"]-1),$superUsuario['id']);
                                 $validacion =$Gcomando;
                               }else{
                                 $validacion ="el dispositivo esta apagado , debe encenderlo pra realizar el defrost";
