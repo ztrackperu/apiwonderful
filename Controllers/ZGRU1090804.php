@@ -197,7 +197,7 @@ class ZGRU1090804 extends Controller{
             $variable="";
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU2009227");
+            $dispositivos = array("ZGRU1090804");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}        
@@ -237,7 +237,7 @@ class ZGRU1090804 extends Controller{
             $variable="";
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU2009227");
+            $dispositivos = array("ZGRU1090804");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}        
@@ -273,7 +273,7 @@ class ZGRU1090804 extends Controller{
             $variable="";
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU2009227");
+            $dispositivos = array("ZGRU1090804");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}        
@@ -310,7 +310,7 @@ class ZGRU1090804 extends Controller{
             $clave="";
             $array = explode(",", $parametro);
             //$dispositivos = array("ZGRU2009227");
-            $dispositivos = array("ZGRU1268663");
+            $dispositivos = array("ZGRU1090804");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$clave = $array[0];}}               
                 if ($clave!="") {
@@ -347,7 +347,7 @@ class ZGRU1090804 extends Controller{
             $variable=1;
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU2009227");
+            $dispositivos = array("ZGRU1090804");
             //$dispositivos = array("ZGRU1268663");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$clave = $array[0];}}               
@@ -364,7 +364,7 @@ class ZGRU1090804 extends Controller{
                               //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
                               //guardar en comandos 
                               if($resul[0]["PowerState"]==0){
-                                $Gcomando = $this->model->guardarComando($dispositivos[0],9,NA($resul[0]["TelematicId"]),NA($resul[0]["PowerState"]),$variable ,$superUsuario['id']);
+                                $Gcomando = $this->model->guardarComando($dispositivos[0],3,NA($resul[0]["TelematicId"]),NA($resul[0]["PowerState"]),$variable ,$superUsuario['id']);
                                 $validacion =$Gcomando;
                               }else{
                                 $validacion ="el dispositivo ya esta encendido ";
@@ -384,7 +384,44 @@ class ZGRU1090804 extends Controller{
             $variable=0;
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU2009227");
+            $dispositivos = array("ZGRU1090804");
+            //$dispositivos = array("ZGRU1268663");
+            $resul =[];
+            if (!empty($array[0])) { if (!empty($array[0] != "")) {$clave = $array[0];}}               
+                if ($clave!="") {
+                    if ($variable>= 0 && $variable<= 1) {
+                        if($superUsuario['pass']==$clave){
+                            //validaciones correctas , insertar en tabla comandos
+                            $mes_fecha = date("n_Y");
+                            $prueba1 =$dispositivos[0]."_".$mes_fecha;
+                            $cursor  = client->$prueba1->madurador->find(array(),array('sort'=>array('id'=>-1),'limit'=>1));
+                            foreach ($cursor as $document) {
+                                array_push($resul,objetoW($document,$superUsuario['gmt'],$superUsuario['modo_temp']));
+                              }
+                              //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
+                              //guardar en comandos 
+                              if($resul[0]["PowerState"]==1){
+                                $Gcomando = $this->model->guardarComando($dispositivos[0],9,NA($resul[0]["TelematicId"]),NA($resul[0]["PowerState"]),$variable ,$superUsuario['id']);
+                                $validacion =$Gcomando;
+                              }else{
+                                $validacion ="el dispositivo ya esta apagado ";
+                              }
+
+                        }else{$validacion= "Pass incorrecto";}
+                    }else{$validacion= "Parametro TurnOn fuera de rango";}
+                }else{$validacion= "No ingresaste la contraseña";}  
+            //verificar ocntrseña y dato que se numerico y que este un rango adecuado
+        }else{ $validacion= "You do not have Authorization :(";}
+        echo json_encode($this->respuesta($validacion));
+    }
+    public function Commands($token,$parametro){
+        //verificar que tenga el rol 2 o 3 sino rechazar por permiso
+        $superUsuario = $this->model->superUser($token);
+        if ($superUsuario['rol']==2 ||$superUsuario['rol']==3) {        
+            $variable=0;
+            $clave="";
+            $array = explode(",", $parametro);
+            $dispositivos = array("ZGRU1090804");
             //$dispositivos = array("ZGRU1268663");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$clave = $array[0];}}               

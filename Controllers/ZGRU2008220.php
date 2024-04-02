@@ -143,4 +143,6 @@ class ZGRU2008220 extends Controller{
         }
         echo json_encode(respuestaR($validacion,$GMT,$GRADO,$data));
     }
+
+    
 }
