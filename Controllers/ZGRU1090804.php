@@ -230,5 +230,45 @@ class ZGRU1090804 extends Controller{
         }else{ $validacion= "You do not have Authorization :(";}
         echo json_encode($this->respuesta($validacion));
     }
+    public function ControlEthylene($token,$parametro){
+        //verificar que tenga el rol 2 o 3 sino rechazar por permiso
+        $superUsuario = $this->model->superUser($token);
+        if ($superUsuario['rol']==2 ||$superUsuario['rol']==3) {        
+            $variable="";
+            $clave="";
+            $array = explode(",", $parametro);
+            $dispositivos = array("ZGRU2009227");
+            $resul =[];
+            if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
+            if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}        
+            if ( $variable!="") {
+                if ($clave!="") {
+                    //validacion de humedad de 0 a 99
+                    if($superUsuario['modo_temp']=="F")   {
+                        $variable = round(($variable-32)*(5/9),1);
+                    }  
+                    if ($variable>= 0 && $variable<= 230) {
+                        if($superUsuario['pass']==$clave){
+                            //validaciones correctas , insertar en tabla comandos
+                            $mes_fecha = date("n_Y");
+                            $prueba1 =$dispositivos[0]."_".$mes_fecha;
+                            $cursor  = client->$prueba1->madurador->find(array(),array('sort'=>array('id'=>-1),'limit'=>1));
+                            foreach ($cursor as $document) {
+                                array_push($resul,objetoW($document,$superUsuario['gmt'],$superUsuario['modo_temp']));
+                              }
+                              //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
+                              //guardar en comandos 
+                              $Gcomando = $this->model->guardarComando($dispositivos[0],6,NA($resul[0]["TelematicId"]),NA($resul[0]["EthyleneSetPoint"]),$variable ,$superUsuario['id']);
+                               $validacion =$Gcomando;
+                        }else{$validacion= "Pass incorrecto";}
+                    }else{$validacion= "Parametro de Etileno fuera de rango";}
+                }else{$validacion= "No ingresaste la contraseña";}
+            }else{$validacion= "No ingresaste el parametro";}
+            //$validacion ="vamos ok";
+
+            //verificar ocntrseña y dato que se numerico y que este un rango adecuado
+        }else{ $validacion= "You do not have Authorization :(";}
+        echo json_encode($this->respuesta($validacion));
+    }
     
 }
