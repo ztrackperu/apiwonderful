@@ -221,7 +221,7 @@ class ZGRU1090804 extends Controller{
                               $Gcomando = $this->model->guardarComando($dispositivos[0],4,NA($resul[0]["TelematicId"]),NA($resul[0]["TempSetPoint"]),$variable ,$superUsuario['id']);
                                $validacion =$Gcomando;
                         }else{$validacion= "Pass incorrecto";}
-                    }else{$validacion= "Parametro de temperatura fuera de rango";}
+                    }else{$validacion= "Parametro de temperatura fuera de rango 2";}
                 }else{$validacion= "No ingresaste la contraseña";}
             }else{$validacion= "No ingresaste el parametro";}
             //$validacion ="vamos ok";
