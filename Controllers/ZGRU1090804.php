@@ -243,10 +243,6 @@ class ZGRU1090804 extends Controller{
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}        
             if ( $variable!="") {
                 if ($clave!="") {
-                    //validacion de humedad de 0 a 99
-                    if($superUsuario['modo_temp']=="F")   {
-                        $variable = round(($variable-32)*(5/9),1);
-                    }  
                     if ($variable>= 0 && $variable<= 230) {
                         if($superUsuario['pass']==$clave){
                             //validaciones correctas , insertar en tabla comandos
