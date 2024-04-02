@@ -306,14 +306,14 @@ class ZGRU1090804 extends Controller{
         //verificar que tenga el rol 2 o 3 sino rechazar por permiso
         $superUsuario = $this->model->superUser($token);
         if ($superUsuario['rol']==2 ||$superUsuario['rol']==3) {        
-            $variable=3;
+            $variable=4;
             $clave="";
             $array = explode(",", $parametro);
             $dispositivos = array("ZGRU2009227");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$clave = $array[0];}}               
                 if ($clave!="") {
-                    if ($variable>= 0 && $variable<= 3) {
+                    if ($variable>= 0 && $variable<= 4) {
                         if($superUsuario['pass']==$clave){
                             //validaciones correctas , insertar en tabla comandos
                             $mes_fecha = date("n_Y");
@@ -328,7 +328,7 @@ class ZGRU1090804 extends Controller{
                                 $Gcomando = $this->model->guardarComando($dispositivos[0],10,NA($resul[0]["TelematicId"]),$variable,NA($resul[0]["PowerState"]),$superUsuario['id']);
                                 $validacion =$Gcomando;
                               }else{
-                                $validacion ="el dispositivo esta apagado , debe enecenderlo pra realizar el defrost";
+                                $validacion ="el dispositivo esta apagado , debe encenderlo pra realizar el defrost";
                               }
 
                         }else{$validacion= "Pass incorrecto";}
