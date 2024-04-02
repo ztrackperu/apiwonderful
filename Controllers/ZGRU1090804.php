@@ -309,7 +309,8 @@ class ZGRU1090804 extends Controller{
             $variable=4;
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU2009227");
+            //$dispositivos = array("ZGRU2009227");
+            $dispositivos = array("ZGRU1268663");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$clave = $array[0];}}               
                 if ($clave!="") {
