@@ -207,7 +207,7 @@ class ZGRU1090804 extends Controller{
                     if($superUsuario['modo_temp']=="F")   {
                         $variable = round(($variable-32)*(5/9),1);
                     }  
-                    if ($variable>=-40 && $variable<= 40) {
+                    if ($variable>=-40 && $variable<= 30) {
                         if($superUsuario['pass']==$clave){
                             //validaciones correctas , insertar en tabla comandos
                             $mes_fecha = date("n_Y");
