@@ -183,7 +183,7 @@ class ZGRU1090804 extends Controller{
                         }else{$validacion= "Pass incorrecto";}
                     }else{$validacion= "Parametro de humedad fuera de rango";}
                 }else{$validacion= "No ingresaste la contraseña";}
-            }else{$validacion= "No ingresaste el parametro";}
+            }else{$validacion= "No ingresaste el parametro humedad";}
             //$validacion ="vamos ok";
 
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
