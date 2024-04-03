@@ -46,7 +46,15 @@ class ZGRU1090804Model extends Query{
             $datos = array($nombreDispositivo,$comnadoId,$TelemetriaId,$ValorActual,$ValorModificado,$UsuarioModifico);
             $data = $this->save($query, $datos);
             if ($data == 1) {
-                $res = "Comand successfully created";
+                switch ($comnadoId) {
+                    case 8:
+                        $verificar = "Control command added, humidity will change from ".$ValorActual." % to ".$ValorModificado . "%";
+                    case 4:
+                        $verificar = "Control command added, Temperature will change from ".$ValorActual." % to ".$ValorModificado . "%";
+                    default :
+                    $verificar = "Comand successfully created";
+                }
+                $res = $verificar;
             } else {
                 $res = "error creating Comand";
             }
