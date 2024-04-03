@@ -29,6 +29,45 @@ class ZGRU2009227Model extends Query{
         $data = $this->select($sql);
         return $data;
     }
+    public function superUser($token)
+    {
+        $sql = "SELECT id ,rol,pass,gmt,modo_temp FROM usuarios_api Where token ='$token'";
+        $data = $this->select($sql);
+        return $data;
+    } 
+    //guardarComando($dispositivos[0],8,NA($resul[0]["TelematicId"]),NA($resul[0]["HumiditySetPoint"]),$variable ,$superUsuario['id'])
+    public function guardarComando($nombreDispositivo,$comnadoId,$TelemetriaId,$ValorActual,$ValorModificado,$UsuarioModifico)
+    {
+        $verificar = "SELECT id FROM comandos WHERE telemetria_id = '$TelemetriaId' AND comando_id = '$comnadoId' AND estado_comando = 1";
+        $existe = $this->select($verificar);
+        if (empty($existe)) {
+            $query = "INSERT INTO comandos (nombre_dispositivo,comando_id,telemetria_id,valor_actual,valor_modificado,usuario_modificado) VALUES (?,?,?,?,?,?)";
+            $datos = array($nombreDispositivo,$comnadoId,$TelemetriaId,$ValorActual,$ValorModificado,$UsuarioModifico);
+            $data = $this->save($query, $datos);
+            if ($data == 1) {
+                switch ($comnadoId) {
+                    case 8:
+                        $verificar = "Control command added, humidity will change from ".$ValorActual." % to ".$ValorModificado . "%";
+                        break;
+                    case 4:
+                        $verificar = "Control command added, Temperature will change from ".$ValorActual." to ".$ValorModificado . "";
+                        break;
+                    case 6:
+                        $verificar = "Control command added, Ethylene will change from ".$ValorActual." ppm to ".$ValorModificado . "ppm";
+                        break;
+                    default :
+                        $verificar = "Comand successfully created";
+                        break;
+                }
+                $res = $verificar;
+            } else {
+                $res = "error creating Comand";
+            }
+        } else {
+            $res = "Comand already exists";
+        }
+        return $res;
+    }
 
 }
 
