@@ -178,7 +178,7 @@ class ZGRU1090804 extends Controller{
                               }
                               //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
                               //guardar en comandos 
-                              $Gcomando = $this->model->guardarComando($dispositivos[0],8,NA($resul[0]["TelematicId"]),NA($resul[0]["HumiditySetPoint"]),$variable ,$superUsuario['id']);
+                              $Gcomando = $this->model->guardarComando($dispositivos[0],8,NA($resul[0]["TelematicId"]),NA($resul[0]["HumiditySetPoint"]),intVal($variable) ,$superUsuario['id']);
                                $validacion =$Gcomando;
                         }else{$validacion= "Pass incorrecto";}
                     }else{$validacion= "Parametro de humedad fuera de rango";}
@@ -254,8 +254,12 @@ class ZGRU1090804 extends Controller{
                               }
                               //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
                               //guardar en comandos 
-                              $Gcomando = $this->model->guardarComando($dispositivos[0],6,NA($resul[0]["TelematicId"]),NA($resul[0]["EthyleneSetPoint"]),$variable ,$superUsuario['id']);
-                               $validacion =$Gcomando;
+                              if(intVal($variable)==6){
+                                $validacion= "El cambio a 6 ppm esta restringido";
+                              }else{
+                                $Gcomando = $this->model->guardarComando($dispositivos[0],6,NA($resul[0]["TelematicId"]),NA($resul[0]["EthyleneSetPoint"]),intVal($variable ),$superUsuario['id']);
+                                $validacion =$Gcomando;
+                              }
                         }else{$validacion= "Pass incorrecto";}
                     }else{$validacion= "Parametro de Etileno fuera de rango";}
                 }else{$validacion= "No ingresaste la contraseña";}
@@ -290,8 +294,9 @@ class ZGRU1090804 extends Controller{
                               }
                               //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
                               //guardar en comandos 
-                              $Gcomando = $this->model->guardarComando($dispositivos[0],7,NA($resul[0]["TelematicId"]),NA($resul[0]["SetPointCo2"]),$variable ,$superUsuario['id']);
-                               $validacion =$Gcomando;
+                              //$Gcomando = $this->model->guardarComando($dispositivos[0],7,NA($resul[0]["TelematicId"]),NA($resul[0]["SetPointCo2"]),$variable ,$superUsuario['id']);
+                               //$validacion =$Gcomando;
+                               $validacion= "Se requiere Actualizacion de Software";
                         }else{$validacion= "Pass incorrecto";}
                     }else{$validacion= "Parametro de CO2 fuera de rango";}
                 }else{$validacion= "No ingresaste la contraseña";}
@@ -326,8 +331,9 @@ class ZGRU1090804 extends Controller{
                               //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
                               //guardar en comandos 
                               if($resul[0]["PowerState"]==1){
-                                $Gcomando = $this->model->guardarComando($dispositivos[0],10,NA($resul[0]["TelematicId"]),$variable,NA($resul[0]["PowerState"]-1),$superUsuario['id']);
-                                $validacion =$Gcomando;
+                                //$Gcomando = $this->model->guardarComando($dispositivos[0],10,NA($resul[0]["TelematicId"]),$variable,NA($resul[0]["PowerState"]-1),$superUsuario['id']);
+                                //$validacion =$Gcomando;
+                                $validacion= "Se requiere Actualizacion de Software";
                               }else{
                                 $validacion ="el dispositivo esta apagado , debe encenderlo pra realizar el defrost";
                               }
@@ -364,8 +370,10 @@ class ZGRU1090804 extends Controller{
                               //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
                               //guardar en comandos 
                               if($resul[0]["PowerState"]==0){
-                                $Gcomando = $this->model->guardarComando($dispositivos[0],3,NA($resul[0]["TelematicId"]),NA($resul[0]["PowerState"]),$variable ,$superUsuario['id']);
-                                $validacion =$Gcomando;
+                                //$Gcomando = $this->model->guardarComando($dispositivos[0],3,NA($resul[0]["TelematicId"]),NA($resul[0]["PowerState"]),$variable ,$superUsuario['id']);
+                                //$validacion =$Gcomando;
+                                $validacion= "Se requiere Actualizacion de Software";
+
                               }else{
                                 $validacion ="el dispositivo ya esta encendido ";
                               }
@@ -401,8 +409,9 @@ class ZGRU1090804 extends Controller{
                               //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
                               //guardar en comandos 
                               if($resul[0]["PowerState"]==1){
-                                $Gcomando = $this->model->guardarComando($dispositivos[0],9,NA($resul[0]["TelematicId"]),NA($resul[0]["PowerState"]),$variable ,$superUsuario['id']);
-                                $validacion =$Gcomando;
+                                //$Gcomando = $this->model->guardarComando($dispositivos[0],9,NA($resul[0]["TelematicId"]),NA($resul[0]["PowerState"]),$variable ,$superUsuario['id']);
+                                //$validacion =$Gcomando;
+                                $validacion= "Se requiere Actualizacion de Software";
                               }else{
                                 $validacion ="el dispositivo ya esta apagado ";
                               }
