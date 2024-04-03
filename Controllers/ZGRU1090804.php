@@ -166,7 +166,7 @@ class ZGRU1090804 extends Controller{
             if ( $variable!="") {
                 if ($clave!="") {
                     //validacion de humedad de 0 a 99
-                    if ($variable>=1 && $variable<= 99) {
+                    if ($variable>=50 && $variable<= 99) {
                         if($superUsuario['pass']==$clave){
                             //validaciones correctas , insertar en tabla comandos
                             $mes_fecha = date("n_Y");
