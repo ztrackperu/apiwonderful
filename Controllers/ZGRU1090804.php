@@ -259,7 +259,7 @@ class ZGRU1090804 extends Controller{
                         }else{$validacion= "Pass incorrecto";}
                     }else{$validacion= "Parametro de Etileno fuera de rango";}
                 }else{$validacion= "No ingresaste la contraseña";}
-            }else{$validacion= "No ingresaste el parametro de humedad ";}
+            }else{$validacion= "No ingresaste el parametro de Etileno ";}
             //$validacion ="vamos ok";
 
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
