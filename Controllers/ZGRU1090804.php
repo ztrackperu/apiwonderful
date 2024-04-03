@@ -221,9 +221,9 @@ class ZGRU1090804 extends Controller{
                               $Gcomando = $this->model->guardarComando($dispositivos[0],4,NA($resul[0]["TelematicId"]),NA($resul[0]["TempSetPoint"]),$variable ,$superUsuario['id']);
                                $validacion =$Gcomando;
                         }else{$validacion= "Pass incorrecto";}
-                    }else{$validacion= "Parametro de temperatura fuera de rango 2";}
-                }else{$validacion= "No ingresaste la contraseña 11";}
-            }else{$validacion= "No ingresaste el parametro 22";}
+                    }else{$validacion= "Parametro de temperatura fuera de rango ";}
+                }else{$validacion= "No ingresaste la contraseña";}
+            }else{$validacion= "No ingresaste el parametro de temperatura";}
             //$validacion ="vamos ok";
 
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
@@ -243,7 +243,7 @@ class ZGRU1090804 extends Controller{
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}        
             if ( $variable!="") {
                 if ($clave!="") {
-                    if ($variable>= 0 && $variable<= 230) {
+                    if ($variable>= 0 && $variable<= 240) {
                         if($superUsuario['pass']==$clave){
                             //validaciones correctas , insertar en tabla comandos
                             $mes_fecha = date("n_Y");
@@ -259,7 +259,7 @@ class ZGRU1090804 extends Controller{
                         }else{$validacion= "Pass incorrecto";}
                     }else{$validacion= "Parametro de Etileno fuera de rango";}
                 }else{$validacion= "No ingresaste la contraseña";}
-            }else{$validacion= "No ingresaste el parametro";}
+            }else{$validacion= "No ingresaste el parametro de humedad ";}
             //$validacion ="vamos ok";
 
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado

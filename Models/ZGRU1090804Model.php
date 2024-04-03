@@ -49,10 +49,16 @@ class ZGRU1090804Model extends Query{
                 switch ($comnadoId) {
                     case 8:
                         $verificar = "Control command added, humidity will change from ".$ValorActual." % to ".$ValorModificado . "%";
+                        break;
                     case 4:
                         $verificar = "Control command added, Temperature will change from ".$ValorActual." % to ".$ValorModificado . "%";
+                        break;
+                    case 6:
+                        $verificar = "Control command added, Ethylene will change from ".$ValorActual." % to ".$ValorModificado . "%";
+                        break;
                     default :
-                    $verificar = "Comand successfully created";
+                        $verificar = "Comand successfully created";
+                        break;
                 }
                 $res = $verificar;
             } else {
