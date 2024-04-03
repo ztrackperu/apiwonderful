@@ -35,7 +35,7 @@ class ZGRU1090804Model extends Query{
         $sql = "SELECT id ,rol,pass,gmt,modo_temp FROM usuarios_api Where token ='$token'";
         $data = $this->select($sql);
         return $data;
-    }
+    } 
     //guardarComando($dispositivos[0],8,NA($resul[0]["TelematicId"]),NA($resul[0]["HumiditySetPoint"]),$variable ,$superUsuario['id'])
     public function guardarComando($nombreDispositivo,$comnadoId,$TelemetriaId,$ValorActual,$ValorModificado,$UsuarioModifico)
     {
@@ -51,10 +51,10 @@ class ZGRU1090804Model extends Query{
                         $verificar = "Control command added, humidity will change from ".$ValorActual." % to ".$ValorModificado . "%";
                         break;
                     case 4:
-                        $verificar = "Control command added, Temperature will change from ".$ValorActual." % to ".$ValorModificado . "%";
+                        $verificar = "Control command added, Temperature will change from ".$ValorActual." to ".$ValorModificado . "";
                         break;
                     case 6:
-                        $verificar = "Control command added, Ethylene will change from ".$ValorActual." % to ".$ValorModificado . "%";
+                        $verificar = "Control command added, Ethylene will change from ".$ValorActual." ppm to ".$ValorModificado . "ppm";
                         break;
                     default :
                         $verificar = "Comand successfully created";
