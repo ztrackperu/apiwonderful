@@ -151,7 +151,7 @@ class ZGRU2232647 extends Controller{
             $variable="";
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU1090804");
+            $dispositivos = array("ZGRU2232647");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}        
@@ -189,7 +189,7 @@ class ZGRU2232647 extends Controller{
             $variable="";
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU1090804");
+            $dispositivos = array("ZGRU2232647");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}        
@@ -229,7 +229,7 @@ class ZGRU2232647 extends Controller{
             $variable="";
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU1090804");
+            $dispositivos = array("ZGRU2232647");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}        
@@ -265,7 +265,7 @@ class ZGRU2232647 extends Controller{
             $variable="";
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU1090804");
+            $dispositivos = array("ZGRU2232647");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$variable = $array[0];}}
             if (!empty($array[1])) { if (!empty($array[1] != "")) {$clave = $array[1];}}        
@@ -307,7 +307,7 @@ class ZGRU2232647 extends Controller{
             $clave="";
             $array = explode(",", $parametro);
             //$dispositivos = array("ZGRU2009227");
-            $dispositivos = array("ZGRU1090804");
+            $dispositivos = array("ZGRU2232647");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$clave = $array[0];}}               
                 if ($clave!="") {
@@ -344,7 +344,7 @@ class ZGRU2232647 extends Controller{
             $variable=1;
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU1090804");
+            $dispositivos = array("ZGRU2232647");
             //$dispositivos = array("ZGRU1268663");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$clave = $array[0];}}               
@@ -381,7 +381,7 @@ class ZGRU2232647 extends Controller{
             $variable=0;
             $clave="";
             $array = explode(",", $parametro);
-            $dispositivos = array("ZGRU1090804");
+            $dispositivos = array("ZGRU2232647");
             //$dispositivos = array("ZGRU1268663");
             $resul =[];
             if (!empty($array[0])) { if (!empty($array[0] != "")) {$clave = $array[0];}}               
