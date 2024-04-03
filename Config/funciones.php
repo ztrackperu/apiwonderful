@@ -360,7 +360,7 @@ function objetoW($document,$gmt,$temp){
 }
 
 function NA($dato){
-    if($dato != null || $dato ===0 ){ return $dato;
+    if($dato != null || $dato ==0 ){ return $dato;
     }else{return "NA";}
 }
 
