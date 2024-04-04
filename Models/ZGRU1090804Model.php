@@ -55,7 +55,7 @@ class ZGRU1090804Model extends Query{
                         //verificar el usuario modifico para ver el cambio de temp 
                         $tempOk = $this->validarTemp($UsuarioModifico);
                         if($tempOk['modo_temp']=="F"){
-                            $ValorModificado = ($ValorModificado*9)/5 +32;
+                            $ValorModificado = round(($ValorModificado*9)/5 +32,1);
                         }
                         $verificar = "Control command added, Temperature will change from ".$ValorActual." to ".$ValorModificado . "";
                         break;
