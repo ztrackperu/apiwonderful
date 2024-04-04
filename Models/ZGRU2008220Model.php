@@ -50,6 +50,11 @@ class ZGRU2008220Model extends Query{
                         $verificar = "Control command added, humidity will change from ".$ValorActual." % to ".$ValorModificado . "%";
                         break;
                     case 4:
+                        //verificar el usuario modifico para ver el cambio de temp 
+                        $tempOk = $this->validarTemp($UsuarioModifico);
+                        if($tempOk['modo_temp']=="F"){
+                            $ValorModificado = round(($ValorModificado*9)/5 +32,1);
+                        }
                         $verificar = "Control command added, Temperature will change from ".$ValorActual." to ".$ValorModificado . "";
                         break;
                     case 6:
@@ -67,6 +72,12 @@ class ZGRU2008220Model extends Query{
             $res = "Command already exists";
         }
         return $res;
+    }
+    public function validarTemp($id)
+    {
+        $sql = "SELECT modo_temp FROM usuarios_api Where id ='$id'";
+        $data = $this->select($sql);
+        return $data;
     }
 
 }

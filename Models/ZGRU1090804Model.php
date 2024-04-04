@@ -43,9 +43,9 @@ class ZGRU1090804Model extends Query{
         $existe = $this->select($verificar);
         if (empty($existe)) {
             $query = "INSERT INTO comandos (nombre_dispositivo,comando_id,telemetria_id,valor_actual,valor_modificado,usuario_modificado) VALUES (?,?,?,?,?,?)";
-            //$datos = array($nombreDispositivo,$comnadoId,$TelemetriaId,$ValorActual,$ValorModificado,$UsuarioModifico);
-            //data = $this->save($query, $datos);
-            $data=1;
+            $datos = array($nombreDispositivo,$comnadoId,$TelemetriaId,$ValorActual,$ValorModificado,$UsuarioModifico);
+            $data = $this->save($query, $datos);
+            //$data=1;
             if ($data == 1) {
                 switch ($comnadoId) {
                     case 8:
