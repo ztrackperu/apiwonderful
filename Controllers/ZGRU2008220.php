@@ -178,10 +178,10 @@ class ZGRU2008220 extends Controller{
                               //guardar en comandos 
                               $Gcomando = $this->model->guardarComando($dispositivos[0],8,NA($resul[0]["TelematicId"]),NA($resul[0]["HumiditySetPoint"]),$variable ,$superUsuario['id']);
                                $validacion =$Gcomando;
-                        }else{$validacion= "Pass incorrecto";}
-                    }else{$validacion= "Parametro de humedad fuera de rango";}
-                }else{$validacion= "No ingresaste la contraseña";}
-            }else{$validacion= "No ingresaste el parametro humedad";}
+                        }else{$validacion= "Incorrect password";}
+                    }else{$validacion= "Humidity parameter out of range";}
+                }else{$validacion= "You did not enter the password";}
+            }else{$validacion= "You did not enter the humidity parameter";}
             //$validacion ="vamos ok";
 
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
@@ -218,10 +218,10 @@ class ZGRU2008220 extends Controller{
                               //guardar en comandos 
                               $Gcomando = $this->model->guardarComando($dispositivos[0],4,NA($resul[0]["TelematicId"]),NA($resul[0]["TempSetPoint"]),$variable ,$superUsuario['id']);
                                $validacion =$Gcomando;
-                        }else{$validacion= "Pass incorrecto";}
-                    }else{$validacion= "Parametro de temperatura fuera de rango ";}
-                }else{$validacion= "No ingresaste la contraseña";}
-            }else{$validacion= "No ingresaste el parametro de temperatura";}
+                        }else{$validacion= "Incorrect password";}
+                    }else{$validacion= "Temperature parameter out of range ";}
+                }else{$validacion= "You did not enter the password";}
+            }else{$validacion= "You did not enter the temperature parameter";}
             //$validacion ="vamos ok";
 
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
@@ -252,12 +252,16 @@ class ZGRU2008220 extends Controller{
                               }
                               //$validacion =" la telemetria es :".NA($resul[0]["TelematicId"])." y la data del set de humedad :".NA($resul[0]["HumiditySetPoint"]). "y el valor actual es :".NA($resul[0]["RelativeHumidity"]);
                               //guardar en comandos 
-                              $Gcomando = $this->model->guardarComando($dispositivos[0],6,NA($resul[0]["TelematicId"]),NA($resul[0]["EthyleneSetPoint"]),$variable ,$superUsuario['id']);
-                               $validacion =$Gcomando;
-                        }else{$validacion= "Pass incorrecto";}
-                    }else{$validacion= "Parametro de Etileno fuera de rango";}
-                }else{$validacion= "No ingresaste la contraseña";}
-            }else{$validacion= "No ingresaste el parametro de Etileno ";}
+                              if(intVal($variable)==6){
+                                $validacion= "The change to 6 ppm is restricted";
+                              }else{
+                                $Gcomando = $this->model->guardarComando($dispositivos[0],6,NA($resul[0]["TelematicId"]),NA($resul[0]["EthyleneSetPoint"]),intVal($variable ),$superUsuario['id']);
+                                $validacion =$Gcomando;
+                              }
+                        }else{$validacion= "Incorrect password";}
+                    }else{$validacion= "Ethylene parameter out of range";}
+                }else{$validacion= "You did not enter the password";}
+            }else{$validacion= "You did not enter the ethylene parameter ";}
             //$validacion ="vamos ok";
 
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
@@ -290,10 +294,10 @@ class ZGRU2008220 extends Controller{
                               //guardar en comandos 
                               $Gcomando = $this->model->guardarComando($dispositivos[0],7,NA($resul[0]["TelematicId"]),NA($resul[0]["SetPointCo2"]),$variable ,$superUsuario['id']);
                                $validacion =$Gcomando;
-                        }else{$validacion= "Pass incorrecto";}
-                    }else{$validacion= "Parametro de CO2 fuera de rango";}
-                }else{$validacion= "No ingresaste la contraseña";}
-            }else{$validacion= "No ingresaste el parametro de CO2";}
+                        }else{$validacion= "Incorrect password";}
+                    }else{$validacion= "CO2 parameter out of range";}
+                }else{$validacion= "You did not enter the password";}
+            }else{$validacion= "You did not enter the CO2 parameter";}
             //$validacion ="vamos ok";
 
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
@@ -327,12 +331,12 @@ class ZGRU2008220 extends Controller{
                                 $Gcomando = $this->model->guardarComando($dispositivos[0],10,NA($resul[0]["TelematicId"]),$variable,NA($resul[0]["PowerState"]-1),$superUsuario['id']);
                                 $validacion =$Gcomando;
                               }else{
-                                $validacion ="el dispositivo esta apagado , debe encenderlo pra realizar el defrost";
+                                $validacion ="The device is turned off, you must turn it on to perform the defrost";
                               }
 
-                        }else{$validacion= "Pass incorrecto";}
-                    }else{$validacion= "Parametro defrost fuera de rango";}
-                }else{$validacion= "No ingresaste la contraseña";}  
+                        }else{$validacion= "Incorrect password";}
+                    }else{$validacion= "Defrost parameter out of range";}
+                }else{$validacion= "You did not enter the password";}  
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
         }else{ $validacion= "You do not have Authorization :(";}
         echo json_encode($this->respuesta($validacion));
@@ -365,12 +369,12 @@ class ZGRU2008220 extends Controller{
                                 $Gcomando = $this->model->guardarComando($dispositivos[0],3,NA($resul[0]["TelematicId"]),NA($resul[0]["PowerState"]),$variable ,$superUsuario['id']);
                                 $validacion =$Gcomando;
                               }else{
-                                $validacion ="el dispositivo ya esta encendido ";
+                                $validacion ="The device is already turned on ";
                               }
 
-                        }else{$validacion= "Pass incorrecto";}
-                    }else{$validacion= "Parametro TurnOn fuera de rango";}
-                }else{$validacion= "No ingresaste la contraseña";}  
+                        }else{$validacion= "Incorrect password";}
+                    }else{$validacion= "TurnOn parameter out of range";}
+                }else{$validacion= "You did not enter the password";}  
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
         }else{ $validacion= "You do not have Authorization :(";}
         echo json_encode($this->respuesta($validacion));
@@ -402,12 +406,12 @@ class ZGRU2008220 extends Controller{
                                 $Gcomando = $this->model->guardarComando($dispositivos[0],9,NA($resul[0]["TelematicId"]),NA($resul[0]["PowerState"]),$variable ,$superUsuario['id']);
                                 $validacion =$Gcomando;
                               }else{
-                                $validacion ="el dispositivo ya esta apagado ";
+                                $validacion ="The device is already turned off ";
                               }
 
-                        }else{$validacion= "Pass incorrecto";}
-                    }else{$validacion= "Parametro TurnOn fuera de rango";}
-                }else{$validacion= "No ingresaste la contraseña";}  
+                        }else{$validacion= "Incorrect password";}
+                    }else{$validacion= "TurnOFF parameter out of range";}
+                }else{$validacion= "You did not enter the password";}  
             //verificar ocntrseña y dato que se numerico y que este un rango adecuado
         }else{ $validacion= "You do not have Authorization :(";}
         echo json_encode($this->respuesta($validacion));

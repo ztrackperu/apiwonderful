@@ -62,10 +62,10 @@ class ZGRU1090804Model extends Query{
                 }
                 $res = $verificar;
             } else {
-                $res = "error creating Comand";
+                $res = "Error creating Command";
             }
         } else {
-            $res = "Comand already exists";
+            $res = "Command already exists";
         }
         return $res;
     }
