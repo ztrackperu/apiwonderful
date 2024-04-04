@@ -43,14 +43,20 @@ class ZGRU1090804Model extends Query{
         $existe = $this->select($verificar);
         if (empty($existe)) {
             $query = "INSERT INTO comandos (nombre_dispositivo,comando_id,telemetria_id,valor_actual,valor_modificado,usuario_modificado) VALUES (?,?,?,?,?,?)";
-            $datos = array($nombreDispositivo,$comnadoId,$TelemetriaId,$ValorActual,$ValorModificado,$UsuarioModifico);
-            $data = $this->save($query, $datos);
+            //$datos = array($nombreDispositivo,$comnadoId,$TelemetriaId,$ValorActual,$ValorModificado,$UsuarioModifico);
+            //data = $this->save($query, $datos);
+            $data=1;
             if ($data == 1) {
                 switch ($comnadoId) {
                     case 8:
                         $verificar = "Control command added, humidity will change from ".$ValorActual." % to ".$ValorModificado . "%";
                         break;
                     case 4:
+                        //verificar el usuario modifico para ver el cambio de temp 
+                        $tempOk = $this->validarTemp($UsuarioModifico);
+                        if($tempOk['modo_temp']=="F"){
+                            $ValorModificado = ($ValorModificado*9)*5 +32;
+                        }
                         $verificar = "Control command added, Temperature will change from ".$ValorActual." to ".$ValorModificado . "";
                         break;
                     case 6:
@@ -69,6 +75,12 @@ class ZGRU1090804Model extends Query{
         }
         return $res;
     }
+    public function validarTemp($id)
+    {
+        $sql = "SELECT modo_temp FROM usuarios_api Where id ='$id'";
+        $data = $this->select($sql);
+        return $data;
+    } 
 }
 
 
